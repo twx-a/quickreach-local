@@ -15,7 +15,7 @@
           <p class= "me-3 my-2">Hello <%= current_user.first_name %></p>
           <li class="nav-item dropdown">
           <% if current_user.photo.key.nil? %>
-            <%= cl_image_tag "avatarstock.jpg", width: 40, height: 40, crop: "fill", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <%= cl_image_tag "v1662524978/development/avatarstock.jpg", width: 40, height: 40, crop: "fill", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <% else %>
             <%= cl_image_tag current_user.photo.key, width: 40, height: 40, crop: "fill", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <% end %>
