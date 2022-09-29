@@ -1,0 +1,100 @@
+<div class="row m-0 p-0">
+  <%= render "shared/sidebar" %>
+
+  <div class="card-border col-10 flex-grow-1 main-content rounded-3 p-3">
+    <h1 class="ps-3"><%= @account.name %></h1>
+
+    <div class="row d-flex-inline ps-3">
+      <!-- COLUMN 1 -->
+      <div class="col-5">
+        <!-- stats -->
+        <div class="card-border mb-3 rounded-3 p-3 pb-1">
+          <div class="d-flex justify-content-around align-items-center">
+            <div>
+              <div class="d-flex align-items-center">
+                <p class="num-icon me-2"><%= @account.triggers.count %></p>
+                <p>Active Triggers</p>
+              </div>
+              <div class="d-flex align-items-center">
+                <p class="num-icon me-2"><%= @account.drafts.count %></p>
+                <p>Active Drafts</p>
+              </div>
+            </div>
+            <div>
+              <div class="d-flex align-items-center">
+                <p class="num-icon me-2"><%= @account.templates.count %></p>
+                <p>Active Templates</p>
+              </div>
+              <div class="d-flex align-items-center">
+                <p class="num-icon me-2">
+                  <%=@account.drafts.where(sent: true).count %>
+                </p>
+                <p>QuickReaches</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end of stats -->
+
+        <div class="card-border rounded-3">
+          <!-- details -->
+          <div class="card-color rounded-3 p-3 pb-1">
+            <div class="header-border mb-2">
+              <h5><strong>Account Details</strong></h5>
+            </div>
+            <p><strong>Category:</strong> <%= @account.category.capitalize %></p>
+            <p><strong>Account Status:</strong> <%= @account.status %></p>
+            <p><strong>Potential Revenue:</strong> SGD $<%= @account.potential_rev %></p>
+            <p><strong>Amount Spent:</strong> SGD $<%= @account.amount_spent %></p>
+          </div>
+          <!-- end of details -->
+
+          <!-- contacts -->
+          <div class="card-color rounded-3 p-3">
+            <div class="header-border mb-2">
+              <h5><strong>Contacts</strong></h5>
+            </div>
+            <% @account.contacts.each do |contact| %>
+              <p class="m-0"><%= contact.first_name %> <%= contact.last_name %> - <em><%= contact.title %></em></p>
+            <% end %>
+          </div>
+          <!-- end of contacts -->
+        </div>
+      </div>
+      <!-- end of column 1 -->
+
+      <!-- COLUMN 2 -->
+      <div class="col-6 ms-3 card-border rounded-3 p-3">
+        <!-- account's drafts -->
+        <h5 class="header-border pb-2"><strong><%= @account.name %> Drafts</strong></h5>
+
+        <div class="fs-6 d-flex">
+          <p class="col-3">Date Updated</p>
+          <p class="col-3">Name</p>
+          <p class="col-3">Trigger</p>
+          <p class="col-3">Template</p>
+        </div>
+
+        <!-- insert draft records here -->
+        <% @account.triggers.each do |trigger| %>
+          <% trigger.drafts.each do |draft| %>
+            <!-- display for each item-->
+              <div class="info">
+                <div class="col-2">
+                  <%= draft.updated_at.strftime("%D") %>
+                </div>
+                <div class="info-content col-4">
+                  <%= draft.trigger.name %>
+                </div>
+
+                <div class="info-actions">
+                  <%= link_to "View Draft", drafts_path %>
+                </div>
+              </div>
+          <% end %>
+        <% end %>
+      </div>
+      <!-- end of column 2 -->
+    </div>
+  </div>
+</div>

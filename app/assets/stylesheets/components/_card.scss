@@ -1,0 +1,37 @@
+.account-card {
+  display: flex;
+  flex-direction: row;
+  border: none;
+  height: 30vh;
+  box-shadow: 0px 0px 1px 1px rgba($color: #231955, $alpha: 0.2);
+}
+
+.account-card-stripe {
+  min-height: 100%;
+  width: 1%;
+  padding: 1%;
+  background-color: rgba($color: #cb1a1a, $alpha: 0.7);
+  border-radius: 2px 0 0 2px;
+}
+
+.trigger-on {
+  background-color: rgba($color: #4ccb1a, $alpha: 0.7);
+}
+
+.account-card-content {
+  width: 98%;
+  background-color: rgba($color: #fffcf2, $alpha: 1);
+  &:hover{
+    background-color: #1F4690;
+    color: #FFE5B4;
+    border-color: #1F4690;
+  }
+}
+.account-card-text {
+  text-decoration: none;
+  color: #1F4690;
+}
+.tutorial-card{
+  background-color: #1F4690;
+  color: #FFE5B4;
+}

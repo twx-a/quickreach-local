@@ -1,0 +1,38 @@
+<div class="row m-0 p-0">
+  <%= render "shared/sidebar" %>
+
+  <div class="col-10 flex-grow-1 main-content align-self-center min-vh-100" data-controller="new-trigger">
+    <div class="navbar mb-3">
+      <!-- main header -->
+      <div class="d-flex">
+        <h1 class="m-0 responsive-font-lg">Triggers</h1>
+      </div>
+
+      <div class="d-flex">
+        <!-- filter bar -->
+        <div class="px-2">
+          <%= render 'search' %>
+        </div>
+        <!-- new trigger btn -->
+        <button class="qt-btn fw-bold responsive-font-reg" data-action="click->new-trigger#revealForm">New Trigger</button>
+      </div>
+    </div>
+
+    <!-- new trigger form -->
+    <div class="trigger-form d-none mb-5 border rounded-3 p-3 bg-light" data-new-trigger-target="form">
+      <%= render "form", trigger: @trigger %>
+    </div>
+
+    <!-- table headers -->
+    <div id="header">
+      <p class="col-1">Date</p>
+      <div class="info-content col-3"><p>Name</p></div>
+      <div class="info-content col-3 d-flex"><p>Account</p></div>
+      <div class="info-content col-3"><p>Template</p></div>
+      <div class="info-action col-1 mx-4"><p>Actions</p></div>
+    </div>
+
+    <!-- table of triggers -->
+    <%= render 'triggers_table', triggers: @triggers %>
+  </div>
+</div>

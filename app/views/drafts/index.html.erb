@@ -1,0 +1,77 @@
+<div class="row m-0 p-0">
+  <%= render "shared/sidebar" %>
+  <div class="col-10 flex-grow-1 main-content">
+
+    <div class ="navbar my-1">
+      <div><h1 class="responsive-font-lg">Drafts</h1></div>
+    </div>
+    <!-- details -->
+    <div id="header">
+      <p class="col-1">Date</p>
+      <div class="info-content col-3">
+        <p>Account</p>
+      </div>
+      <div class="info-content col-3">
+        <p>Subject</p>
+      </div>
+
+      <div class="info-content col-3">
+        <p>News Link</p>
+      </div>
+      <div class="info-action col-3">
+        <p class="px-4">Actions</p>
+      </div>
+    </div>
+
+    <!-- display for each item-->
+    <% @drafts.each do |draft| %>
+      <div class="info responsive-font-reg">
+        <p class="col-1"> <%= draft.updated_at.strftime("%D") %></p>
+        <div class="info-content col-3">
+          <%= draft.trigger.account.name %>
+        </div>
+        <div class="info-content col-3">
+          <%= draft.edited_subject %>
+        </div>
+        <div class="info-content col-3">
+          <%= link_to "#{draft.news.source_id}",
+          draft.news.link,
+           target: '_blank', class: "news_url" %>
+        </div>
+
+        <div class="info-actions d-flex">
+          <!-- off canvas for email editing -->
+          <!-- btn -->
+            <button class="edit-form-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight<%= "canvas-#{draft.id}" %>" aria-controls="offcanvasRight<%= "canvas-#{draft.id}" %>">Edit<i class="fas fa-pencil-alt"></i></button>
+          <!-- content-->
+            <div class="offcanvas offcanvas-end bg-dark-blu text-dy" tabindex="-1" id="offcanvasRight<%= "canvas-#{draft.id}" %>" aria-labelledby="offcanvasRightLabel">
+              <div class="offcanvas-header">
+                <div id="offcanvasRightLabel">
+                  <h2><strong><%= draft.trigger.name %></strong></h2>
+                </div>
+
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                <div class="d-flex align-items-center justify-content-center">
+                  <div class="w-100">
+                    <%= render "form", draft: draft %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <%= link_to send_draft_path(draft), controller: "drafts", action: "send_draft" do %>
+              <p>Send <i class="fa-solid fa-paper-plane"></i></p>
+            <% end %>
+
+
+            <%= link_to draft_path(draft),
+              data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do
+            %>
+            <p>Delete <i class="far fa-trash-alt"></i></p>
+            <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

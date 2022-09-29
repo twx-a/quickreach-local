@@ -1,0 +1,23 @@
+// where does the blue text color come from? config/colors.scss?
+
+.card-border {
+  border: solid 1px #1F4690;
+}
+
+.header-border {
+  border-bottom: solid 1px #1F4690;
+}
+
+.num-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+  border: 1px solid;
+  border-radius: 50%;
+  padding: 10px;
+  background-color: #1F4690;
+  color: white;
+}

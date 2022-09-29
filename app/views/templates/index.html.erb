@@ -1,0 +1,56 @@
+<div class="row m-0 p-0">
+  <%= render "shared/sidebar" %>
+
+  <div class="col-10 flex-grow-1 main-content align-self-center min-vh-100" data-controller="new-template">
+    <div class="navbar mb-3">
+      <!-- main header -->
+      <h1 class="responsive-font-lg m-0">Email Templates</h1>
+
+      <div class="d-flex">
+        <!-- filter bar -->
+        <div class="px-2">
+          <%= render 'search' %>
+        </div>
+        <!-- new template btn -->
+        <button class="qt-btn fw-bold responsive-font-reg" data-action="click->new-template#revealForm">New Template</button>
+      </div>
+    </div>
+
+    <!-- new template -->
+    <div class="d-none d-flex justify-content-between mb-5" data-new-template-target="form">
+        <!-- new form -->
+        <div class="col-6 flex-shrink-1 me-5 border rounded-3 p-3 bg-light" data-new-trigger-target="form">
+          <%= render 'form', template: @template %>
+        </div>
+
+        <!-- notes section -->
+        <div class="col-6 flex-shrink-1 bg-dark-blu text-dy rounded-3 p-3">
+          <h3>Note</h3>
+          <p>In order for QuickReach to accurately use your template, please use the following components in your body wrapped in <%= "<< >>" %>:</p>
+          <ul>
+            <li>account_name (e.g. Grab)</li>
+            <li>contact_fn (contact's first name e.g. Bob)</li>
+            <li>account_category (e.g. transportation)</li>
+          </ul>
+
+          <p>Example: </p>
+          <p>Hello <%= "<<contact_fn>>" %>!
+            Just wanted to check in as recently we have seen that <%= "<<account_name>>" %>
+            is experiencing some challenges with profitability. Keen to understand
+            your challenges better to see if we can support your effort in keeping
+            <%= "<<account_name>>" %> as a leader in the <%= "<<account_category>>" %> sector.</p>
+        </div>
+    </div>
+
+    <!-- table headers -->
+    <div class="headers fw-bold">
+      <p class="ps-4 col-1">Date</p>
+      <p class="col-2 flex-grow-1 ms-2">Template Name</p>
+      <p class="col-4 mx-3">Subject</p>
+      <p class="col-2 px-5">Actions</p>
+    </div>
+
+    <!-- table of templates -->
+    <%= render 'templates_table', templates: @templates %>
+  </div>
+</div>
